@@ -1,86 +1,58 @@
-# Purpose of the assignment
-The purpose of the assignment is to give us an understanding of how you approach a problem and understand your thought process. 
+# Nursery Attendance Management App
 
-Furthermore we would also like to see what you chose to focus on, to get an insight into how you work.
+## Setup Instructions
 
-Argue for any decisions made and write your thoughts and potential next steps if given more time, in the readme.
+1. Clone this repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file in the root directory with the following content:
+   ```
+   NEXT_PUBLIC_TOKEN=your_access_token_here
+   ```
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
+6. Alternately you can run `npm run build` and then `npm run start` to run the app in production mode.
 
-The design of the app doesn't have to be beautiful, but it should be done in a functional way.
+## Considerations
 
-It is ok to Google or use ChatGPT, but you need to inform us via comments in the code, if something is a direct copy paste.
+I've focused on the following:
 
-When sending back the task, please send it as a link to your repo and tell us how much time was spent on the task.
+- Using the Famly API to fetch data
+- Using Tanstack React Query to fetch data, and handle caching
+- Using Tanstack Table to display the data
+- Using Flowbite for styling
+- Using Next.js Image to display images
+- Proper response to the user on checkin/checkout or if there is an error in pickup time
+- Making the UX quick, easy and logical
 
-## How to get started
-- Fork this repository
-- Create a small application in React
-- Describe your design decisions and setup instructions in the README.md of the forked repository
+I wanted to make it look okay, and not only functional, but I'm not the best designer.
+I also focused on the UX to make a solution that is simple and to the point, but still possible to extend with more features.
 
-## The assignment
-You are tasked to build a simple application for a nursery to manage the attendance of children each day.
+## AI tools
 
-It has to be done using Typescript.
+- I use Cursor as the IDE so it helps me with some autocompletions and suggestions.
+- I've copied some boilerplate code from Tanstack to setup the table.
+- I got Cursor to make the initial function for grouping pagination by letters, but later changed it out to use `reduce` rather than the initial `for` loop it suggested.
 
-The application should be able to do 3 things:
-1. List children with some form of pagination/lazy-loading/infinite-scroll
-2. Checkin a child
-3. Checkout a child
+## Time used
 
-If you have any questions feel free to reach out to the person who sent you the assignment ☺️
+I ended up spending more time, since its a fun little task, and also wanted to make it look okay. I therfore spent some time looking for a good UI library as a starting point.
 
-## API Specification
+I also have bad experiences with making something that is not finished, even for a minor case, so I'd rather make it worth the time, and make it look and behave properly.
 
-You have received an access token in the email that contained the link to this page.
+It can of course be much more polished and prettier.
 
-### Fetch some children from
+Approximately 6 hours spent.
 
-The API does not support any limit or offset, so the pagination/lazy-loading/infinite-scroll will have to be done client-side only.
+## Improvements
 
-```
-GET https://app.famly.co/api/daycare/tablet/group
-Arguments: {
-	accessToken: <accessToken>,
-	groupId: '86413ecf-01a1-44da-ba73-1aeda212a196',
-	institutionId: 'dc4bd858-9e9c-4df7-9386-0d91e42280eb'
-}
-```
-
-Example in cURL:
-
-```bash
-curl "https://app.famly.co/api/daycare/tablet/group?accessToken=<accessToken>&groupId=86413ecf-01a1-44da-ba73-1aeda212a196&institutionId=dc4bd858-9e9c-4df7-9386-0d91e42280eb"
-```
-
-### Checkin child
-```
-POST https://app.famly.co/api/v2/children/<childId>/checkins
-
-Arguments: {
-	accessToken: <accessToken>
-	pickupTime: 16:00
-}
-```
-
-Example in cURL:
-
-```bash
-curl \
-  -d 'accessToken=<accessToken>&pickupTime=16:00' \
-  https://app.famly.co/api/v2/children/fcd683d0-bc31-468c-948f-1ca70b91439d/checkins
-```
-
-### Checkout child
-```
-POST https://app.famly.co/api/v2/children/<childId>/checkout
-Arguments: {
-	accessToken: <accessToken>
-}
-```
-
-Example in cURL:
-
-```bash
-curl \
-  -d 'accessToken=<accessToken>' \
-  https://app.famly.co/api/v2/children/fcd683d0-bc31-468c-948f-1ca70b91439d/checkout
-```
+- Design, it's not very pretty right now
+- Maybe having a checkout button directly from the table
+- Have pagination state in the url
+- Handle the pickup time better so the user can choose not to set it on checkin.
+- Clear pickup time on checkout. (a normal app would probably have a default or a schedule that is set beforehand)

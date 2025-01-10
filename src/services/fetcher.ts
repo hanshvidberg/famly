@@ -1,7 +1,11 @@
 const TOKEN = process.env.NEXT_PUBLIC_TOKEN || "";
 const baseUrl = "https://app.famly.co/api/";
 
-const fetcher = async <T>(url: string, body?: any, options?: RequestInit) => {
+const fetcher = async <T>(
+  url: string,
+  body?: Record<string, string>,
+  options?: RequestInit
+) => {
   const params = new URLSearchParams();
   params.set("accessToken", TOKEN);
 

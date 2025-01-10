@@ -33,7 +33,7 @@ export const ChildrenList = () => {
   return (
     <div className="py-4">
       <h1 className="text-2xl font-bold text-black-500">
-        Children daycare check in / out
+        Children daycare check in/out
         {isFetching ? <Spinner /> : null}
       </h1>
       <p className="text-sm text-gray-500 py-2">

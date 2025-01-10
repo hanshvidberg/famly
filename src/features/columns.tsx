@@ -1,13 +1,10 @@
-import {
-  BiSolidCheckCircle,
-  BiSolidXCircle,
-  BiSolidDonateHeart,
-} from "react-icons/bi";
+import { BiSolidCheckCircle, BiSolidDonateHeart } from "react-icons/bi";
 
 import { Child } from "@/types/child";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "flowbite-react";
 import { useChildStore } from "./ChildrenList/childStore";
+import Image from "next/image";
 
 export const tableColumns: ColumnDef<Child>[] = [
   {
@@ -15,10 +12,12 @@ export const tableColumns: ColumnDef<Child>[] = [
     id: "fullName",
     cell: (info) => (
       <div className="flex items-center gap-3 min-w-[200px]">
-        <img
+        <Image
           src={info.row.original.image.small}
           alt="Child"
           className="w-10 h-10 rounded-full flex-shrink-0"
+          width={40}
+          height={40}
         />
         <div className="truncate">
           <span className="block truncate">

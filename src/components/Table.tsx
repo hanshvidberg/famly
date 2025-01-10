@@ -120,8 +120,8 @@ function Filter({
   column,
   table,
 }: {
-  column: Column<any, any>;
-  table: Table<any>;
+  column: Column<Child, unknown>;
+  table: Table<Child>;
 }) {
   const firstValue = table
     .getPreFilteredRowModel()

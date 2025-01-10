@@ -3,7 +3,6 @@ import { Modal, Button } from "flowbite-react";
 import { useChildStore } from "./childStore";
 import { TimePicker } from "@asphalt-react/time-picker";
 import { useEffect, useState } from "react";
-import { CheckinResponse } from "@/services/useCheckin";
 
 export const CheckInOut = ({
   show,
@@ -28,6 +27,7 @@ export const CheckInOut = ({
 
   useEffect(() => {
     setTime([pickupTime, pickupTime]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [child?.pickupTime]);
 
   return (

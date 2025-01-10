@@ -4,7 +4,6 @@ import { checkIn } from "./checkIn";
 import { invalidateQueries } from "./invalidateQueries";
 import { useChildStore } from "@/features/ChildrenList/childStore";
 import { useToastStore } from "@/hooks/useToast";
-import { responseCookiesToRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
 type CheckinRequest = {
   pickupTime: string;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from "react";
 import { Table } from "@tanstack/react-table";
 import { Child } from "@/types/child";
