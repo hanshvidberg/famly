@@ -10,67 +10,41 @@ import { Button } from "flowbite-react";
 import { useChildStore } from "./ChildrenList/childStore";
 
 export const tableColumns: ColumnDef<Child>[] = [
-  //   {
-  //     accessorKey: "firstName",
-  //     cell: (info) => info.getValue(),
-  //     footer: (props) => props.column.id,
-  //   },
   {
     accessorFn: (row) => `${row.name.fullName}`,
     id: "fullName",
     cell: (info) => (
-      <div className="flex space-x-5">
-        <div>
-          <img
-            src={info.row.original.image.small}
-            alt="Child"
-            className="w-10 h-10 rounded-full"
-          />
-        </div>
-        <div className="flex flex-col flex-start min-w-40">
-          <span>{info.row.original.name.fullName}</span>
-          {/* <span>
-            {isToday(new Date(info.row.original.birthday))
-              ? "Today"
-              : new Date(info.row.original.birthday).toLocaleDateString()}
-          </span> */}
+      <div className="flex items-center gap-3 min-w-[200px]">
+        <img
+          src={info.row.original.image.small}
+          alt="Child"
+          className="w-10 h-10 rounded-full flex-shrink-0"
+        />
+        <div className="truncate">
+          <span className="block truncate">
+            {info.row.original.name.fullName}
+          </span>
         </div>
       </div>
     ),
-    header: () => <span className="text-left">Child</span>,
+    header: () => <span>Child</span>,
     footer: (props) => props.column.id,
     enableSorting: false,
     enableColumnFilter: false,
   },
-  //   {
-  //     accessorKey: "image",
-  //     header: () => "",
-
-  //     enableSorting: false,
-  //     cell: (info) => (
-  //       <img
-  //         src={info.row.original.image.small}
-  //         alt="Child"
-  //         className="w-10 h-10 rounded-full"
-  //       />
-  //     ),
-  //     footer: (props) => props.column.id,
-  //     enableColumnFilter: false,
-  //   },
   {
     enableSorting: false,
     accessorKey: "checkedIn",
-    header: () => <span>Checked in</span>,
-    cell: (info) =>
-      info.getValue() ? (
-        <div className="flex items-center">
-          <BiSolidCheckCircle className="text-green-500 w-full h-8" />
-        </div>
-      ) : (
-        <div className="flex items-center">
-          <BiSolidXCircle className="text-gray-500 w-full h-4" />
-        </div>
-      ),
+    header: () => <span className="text-center w-full">Checked in</span>,
+    cell: (info) => (
+      <div className="flex items-center justify-center w-[50px]">
+        {info.getValue() ? (
+          <BiSolidCheckCircle className="text-secondary w-6 h-6" />
+        ) : (
+          "-"
+        )}
+      </div>
+    ),
     footer: (props) => props.column.id,
     enableColumnFilter: false,
   },
@@ -78,10 +52,19 @@ export const tableColumns: ColumnDef<Child>[] = [
     enableSorting: false,
     accessorKey: "pickupTime",
     header: "Pickup Time",
-    cell: (info) =>
-      info.row.original.pickupTime
-        ? new Date(info.row.original.pickupTime).toLocaleTimeString()
-        : " - ",
+    cell: (info) => (
+      <div className="w-[75px]">
+        {info.row.original.pickupTime
+          ? new Date(info.row.original.pickupTime).toLocaleTimeString(
+              undefined,
+              {
+                hour: "2-digit",
+                minute: "2-digit",
+              }
+            )
+          : " - "}
+      </div>
+    ),
     footer: (props) => props.column.id,
     enableColumnFilter: false,
   },
@@ -89,18 +72,18 @@ export const tableColumns: ColumnDef<Child>[] = [
     accessorKey: "actions",
     header: () => "",
     cell: (info) => (
-      <div>
+      <div className="flex justify-end min-w-[100px]">
         <Button
           color="light"
-          className=" flex items-center justify-center"
+          className="flex items-center justify-center whitespace-nowrap"
           onClick={() => {
             useChildStore.setState({
               selectedChild: info.row.original.childId,
             });
           }}
         >
-          <span className="mr-2 flex items-center">Check in / out</span>
-          <BiSolidDonateHeart className="w-full h-6" />
+          <span className="mr-2">Check in / out</span>
+          <BiSolidDonateHeart className="w-5 h-5 flex-shrink-0" />
         </Button>
       </div>
     ),

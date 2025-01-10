@@ -12,5 +12,6 @@ export const useGetChild = () => {
   if (!child) {
     return null;
   }
+
   return child;
 };

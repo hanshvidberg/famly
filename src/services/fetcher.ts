@@ -1,7 +1,7 @@
-const TOKEN = "1127a03c-ed76-41d5-9058-f9ca105c41cf";
+const TOKEN = process.env.NEXT_PUBLIC_TOKEN || "";
 const baseUrl = "https://app.famly.co/api/";
 
-const fetcher = async <T>(url: string, body?: any) => {
+const fetcher = async <T>(url: string, body?: any, options?: RequestInit) => {
   const params = new URLSearchParams();
   params.set("accessToken", TOKEN);
 
@@ -11,7 +11,7 @@ const fetcher = async <T>(url: string, body?: any) => {
     });
   }
 
-  const res = await fetch(`${baseUrl}${url}?${params.toString()}`);
+  const res = await fetch(`${baseUrl}${url}?${params.toString()}`, options);
   return res.json() as Promise<T>;
 };
 

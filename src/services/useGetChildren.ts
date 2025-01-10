@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import fetcher from "./fetcher";
 import { ChildrenResponse } from "@/types/child";
 
@@ -10,7 +10,15 @@ const body = {
 
 export const useGetChildren = () => {
   return useQuery({
+    placeholderData: keepPreviousData,
     queryKey: ["children"],
-    queryFn: () => fetcher<ChildrenResponse>(URL, body),
+    queryFn: () => getChildren(),
+    initialData: { children: [] },
+    staleTime: 0,
   });
+};
+
+export const getChildren = async () => {
+  const response = await fetcher<ChildrenResponse>(URL, body);
+  return response;
 };
